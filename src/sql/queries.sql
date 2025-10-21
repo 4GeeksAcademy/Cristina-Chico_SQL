@@ -5,41 +5,41 @@ SELECT * FROM observations;
 
 
 -- MISSION 1: ¿Cuáles son las primeras 10 observaciones registradas?;
---- SELECT * FROM observations
---- LIMIT 10;
+SELECT * FROM observations
+LIMIT 10;
 
 -- MISSION 2:¿Qué identificadores de región (region_id) aparecen en los datos?;
 --- Usa SELECT DISTINCT para evitar repeticiones.;
----SELECT DISTINCT region_id FROM observations
+SELECT DISTINCT region_id FROM observations
 
 -- MISSION 3: ¿Cuántas especies distintas (species_id) se han observado? 
 --- Combina COUNT con DISTINCT para no contar duplicados;
 --- Usa SELEC(T DISTINCT para evitar repeticiones.;
---- SELECT COUNT (DISTINCT species_id) FROM observations;
+SELECT COUNT (DISTINCT species_id) FROM observations;
 
 
 
 -- MISSION 4: ¿Cuántas observaciones hay para la región con region_id = 2?
 --- Aplica una condición con WHERE.;
---- SELECT region_id FROM observations WHERE region_id = 2;
+SELECT region_id FROM observations WHERE region_id = 2;
 
 -- MISSION 5: ¿Cuántas observaciones se registraron el día 1998-08-08?
 --- Filtra por fecha exacta usando igualdad.;
---- SELECT COUNT (observation_date) FROM observations
---- WHERE observation_date="1998-08-08";
+SELECT COUNT (observation_date) FROM observations
+WHERE observation_date="1998-08-08";
 
 
 
 -- MISSION 6: ¿Cuál es el region_id con más observaciones?
 --- Agrupa por región y cuenta cuántas veces aparece cada una.;
--- SELECT COUNT(region_id), region_id FROM observations
---GROUP BY region_id 
---ORDER BY COUNT(region_id) DESC
--- LIMIT 1;
+SELECT COUNT(region_id), region_id FROM observations
+GROUP BY region_id 
+ORDER BY COUNT(region_id) DESC
+LIMIT 1;
 
 -- MISSION 7:¿Cuáles son los 5 species_id más frecuentes?
 --- Agrupa, ordena por cantidad descendente y limita el resultado.;
-'''SELECT COUNT(species_id), species_id FROM observations
+SELECT COUNT(species_id), species_id FROM observations
 GROUP BY species_id 
 ORDER BY COUNT(species_id) DESC
 LIMIT 5;
@@ -63,7 +63,7 @@ INNER JOIN regions ON observations.region_id = regions.id;
 -- MISSION 11: Muestra el nombre científico de cada especie registrada (species.scientific_name).
 --Relaciona observations con species usando species_id.;
 SELECT species.scientific_name FROM observations 
-INNER JOIN species ON observations.species_id = species.id;'''
+INNER JOIN species ON observations.species_id = species.id;
 
 --MISSION 12: ¿Cuál es la especie más observada por cada región?
 -- Agrupa por región y especie, y ordena por cantidad.;
@@ -72,9 +72,3 @@ INNER JOIN species ON observations.species_id = species.id
 INNER JOIN regions ON observations.region_id = regions.id
 GROUP BY region, species.scientific_name
 ORDER BY region, total DESC;
-
--- MISSION 13: Inserta una nueva observación ficticia en la tabla observations.
---Asegúrate de incluir todos los campos requeridos por el esquema.;
-INSERT INTO observations (id,species_id, region_id, observer, 
-observation_date, latitude, longitude,count)
-VALUES (AUTOINCREMENT,'1','2','Empresa','10-13-2025','−8.1091','−79.0215','7');
